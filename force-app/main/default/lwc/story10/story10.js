@@ -1,9 +1,9 @@
 import { LightningElement, wire,api, track } from 'lwc';
 import fetchCusTypeLocal from '@salesforce/apex/Story10.fetchCusType'
 import { getPicklistValues, getObjectInfo} from 'lightning/uiObjectInfoApi'
-import FdDetailLocal from '@salesforce/schema/FD_Detail__c'
-import depTypeLocal from '@salesforce/schema/FD_Detail__c.Deposit_Type__c'
-import payFreqLocal from '@salesforce/schema/FD_Detail__c.Payout_Frequency__c'
+import FdDetailLocal from '@salesforce/schema/FD_Details__c'
+import depTypeLocal from '@salesforce/schema/FD_Details__c.Deposit_Type__c'
+import payFreqLocal from '@salesforce/schema/FD_Details__c.Payout_Frequency__c'
 import interestSchFetch from '@salesforce/apex/Story10.interestSchFetch'
 import updateFD from '@salesforce/apex/Story10.updateFD'
 import {ShowToastEvent} from 'lightning/platformShowToastEvent'
@@ -14,7 +14,6 @@ customerOptions=[]
 selectedCusType=''
 @track depTypeOptions=[]
 selectedDepType=''
-selectedPayFreq=''
 payFreqData// bütün payout frequency datasını tutan property
 @track payFreqOptions=[]
 tenorInMonth=''
@@ -80,8 +79,8 @@ wiredDataDep( { error, data } ) {
         //Dependency olduğu için controller fieldın onchange kısmında bu islemleri yapıyoruz.
         
         //Field Dependency icin
-        let key = this.payFreqData.controllerValues[event.detail.value]
-        this.payFreqOptions = this.payFreqData.values.filter(opt=>opt.validFor.includes(key)) //filter(function)(opt){}
+        let key = this.payFreqData.controllerValues[event.detail.value];
+        this.payFreqOptions = this.payFreqData.values.filter(opt => opt.validFor.includes(key)) //filter(function)(opt){}
     }
 
     payoutFreqChange(event){

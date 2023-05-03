@@ -1,10 +1,10 @@
 public with sharing class Story10 {
     //User in girdigi Customer Type bilgisini org dan almak icin SOQL yaptik.
     @AuraEnabled(cacheable=true)//(cacheable=true) ifadesi SOQL işelmelerinde yazilir genelde.
-    public static FD_Detail__c fetchCusType(String fdId){
-        FD_Detail__c fdRec = [SELECT Id, Name, Customer_Type__c FROM FD_Detail__c WHERE Id=:fdId];
+    public static FD_Details__c fetchCusType(String fdId){
+        FD_Details__c fdRec = [SELECT Id, Name, Customer_Type__c FROM FD_Details__c WHERE Id=:fdId];
         return fdRec;
-        // return[SELECT Id,Name,Customer_Type__c FROM FD_Detail__c WHERE Id=:fdId ];
+        // return[SELECT Id,Name,Customer_Type__c FROM FD_Details__c WHERE Id=:fdId ];
     }
     //Fetch Scheme butonuna basılınca
     //User Customer Type,Deposit type,Payout frequency,Tenor Months,Tenor Days ve FD Amount fieldlarını doldurunca ona uygun Interest Scheme ve Interest Rate vereb SOQL yapildi
@@ -39,7 +39,7 @@ public with sharing class Story10 {
         system.debug('Interest Rate: ' + intRate);
         system.debug('FD Record Id: ' + fdId);
 
-        FD_Detail__c recFd = new FD_Detail__c();
+        FD_Details__c recFd = new FD_Details__c();
         recFd.Id=fdId;
         recFd.Deposit_Type__c=depType;
         recFd.Payout_Frequency__c=payFreq;
